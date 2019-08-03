@@ -1,0 +1,64 @@
+{:paths ["resources" "src"]
+
+ :deps {org.clojure/clojure {:mvn/version "1.10.1"}
+
+        ch.qos.logback/logback-classic {:mvn/version "1.3.0-alpha4"}
+
+        org.apache.ignite/ignite-core {:mvn/version "2.7.0"}
+        org.apache.ignite/ignite-spring {:mvn/version "2.7.0"}
+        org.apache.ignite/ignite-zookeeper {:mvn/version "2.7.0"}
+
+        ;; org.gridgain/ignite-core {:mvn/version "8.7.7"}
+        ;; org.gridgain/ignite-spring {:mvn/version "8.7.7"}
+        ;; org.gridgain/ignite-zookeeper {:mvn/version "8.7.7"}
+
+        org.clojure/tools.nrepl {:mvn/version "0.2.13"}
+        cider/cider-nrepl {:mvn/version "0.22.4"}
+        ;; refactor-nrepl {:mvn/version "2.4.0"}
+
+        integrant {:mvn/version "0.8.0-alpha2"}}
+
+ :mvn/repos
+ {"GridGain External Repository"
+  {:url "http://www.gridgainsystems.com/nexus/content/repositories/external"}}
+
+ :aliases
+ {:test {:extra-paths ["test"]
+         :extra-deps {org.clojure/test.check {:mvn/version "RELEASE"}}}
+
+  :runner
+  {:extra-deps {com.cognitect/test-runner
+                {:git/url "https://github.com/cognitect-labs/test-runner"
+                 :sha "cb96e80f6f3d3b307c59cbeb49bb0dcb3a2a780b"}}
+   :main-opts ["-m" "cognitect.test-runner"
+               "-d" "test"]}
+
+  :outdated {:extra-deps {olical/depot {:mvn/version "1.8.4"}}
+             :main-opts ["-m" "depot.outdated.main"]}
+
+  :lint {:extra-deps {com.jameslaverack/cljfmt-runner
+                      {:git/url "https://github.com/JamesLaverack/cljfmt-runner"
+                       :sha "d6952345b3047e03ca3a88f89a1433c109b7b442"}}
+         :main-opts ["-m" "cljfmt-runner.check"]}
+  :lint/fix {:main-opts ["-m" "cljfmt-runner.fix"]}
+
+  :uberjar {:extra-deps {uberdeps {:mvn/version "0.1.4"}}
+            :main-opts ["-m" "uberdeps.uberjar"]}
+
+  :native-image
+  {:main-opts ["-m clj.native-image ignite_repl"
+               "--initialize-at-build-time"
+               ;; optional native image name override
+               "-H:Name=ignite_repl"]
+   :jvm-opts ["-Dclojure.compiler.direct-linking=true"]
+   :extra-deps
+   {clj.native-image
+    {:git/url "https://github.com/taylorwood/clj.native-image.git"
+     :sha "e480cb92b9a85913b3bcad9d878db237d810f286"}}}
+
+  :dev {:extra-paths ["env/dev"]
+        :extra-deps {org.clojure/tools.deps.alpha
+                     {:git/url "https://github.com/clojure/tools.deps.alpha.git"
+                      :sha "d0b33e0d346736aa985c150145b332f97b92135e"
+                      :exclusions [org.slf4j/slf4j-nop]}
+                     integrant/repl {:mvn/version "0.3.1"}}}}}

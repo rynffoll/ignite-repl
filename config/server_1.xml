@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util.xsd">
+
+  <bean class="org.apache.ignite.configuration.IgniteConfiguration">
+
+    <property name="consistentId" value="server_1"/>
+    <property name="peerClassLoadingEnabled" value="true"/>
+
+    <property name="dataStorageConfiguration">
+      <bean class="org.apache.ignite.configuration.DataStorageConfiguration">
+        <property name="defaultDataRegionConfiguration">
+          <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
+            <property name="name" value="Memory Region"/>
+              <property name="maxSize" value="#{500L * 1024 * 1024}"/>
+          </bean>
+        </property>
+
+        <property name="dataRegionConfigurations">
+          <list>
+            <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
+              <property name="name" value="Persistence Region"/>
+              <property name="maxSize" value="#{500L * 1024 * 1024}"/>
+              <property name="persistenceEnabled" value="true"/>
+            </bean>
+          </list>
+        </property>
+      </bean>
+    </property>
+
+    <property name="communicationSpi">
+      <bean class="org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi">
+        <property name="localPort" value="47101"/>
+        <property name="localPortRange" value="0"/>
+      </bean>
+    </property>
+
+    <property name="discoverySpi">
+      <bean class="org.apache.ignite.spi.discovery.zk.ZookeeperDiscoverySpi">
+        <property name="zkConnectionString" value="zookeeper:2181"/>
+        <property name="sessionTimeout" value="30000"/>
+        <property name="zkRootPath" value="/apacheIgnite"/>
+        <property name="joinTimeout" value="10000"/>
+      </bean>
+    </property>
+  </bean>
+
+</beans>
