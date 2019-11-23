@@ -6,7 +6,7 @@
 
 (def ignite (atom nil))
 
-(defn ignite-star [c]
+(defn ignite-start [c]
   (Ignition/start c))
 
 (defn ignite-stop []
