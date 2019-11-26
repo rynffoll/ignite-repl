@@ -18,7 +18,7 @@
         <property name="defaultDataRegionConfiguration">
           <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
             <property name="name" value="Memory Region"/>
-              <property name="maxSize" value="#{500L * 1024 * 1024}"/>
+            <property name="maxSize" value="#{500L * 1024 * 1024}"/>
           </bean>
         </property>
 
@@ -49,6 +49,13 @@
         <property name="joinTimeout" value="10000"/>
       </bean>
     </property>
+
+    <property name="gridLogger">
+      <bean class="org.apache.ignite.logger.log4j2.Log4J2Logger">
+        <constructor-arg type="java.lang.String" value="/config/log4j2.xml"/>
+      </bean>
+    </property>
+
   </bean>
 
 </beans>

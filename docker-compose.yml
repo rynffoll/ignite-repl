@@ -13,13 +13,14 @@ services:
       - ignite_network
 
   server_1:
-    image: apacheignite/ignite:2.7.0
+    image: gridgain-community:8.7.8
+    # image: apacheignite/ignite:2.7.0
     # image: gridgain/community:8.7.7
     ports:
       - "9011:9011"
       - "47101:47101"
       - "47501:47501"
-      - "10801:10800"
+      - "10800:10800"
       - "11211:11211"
       - "5005:5005"
     volumes:
@@ -30,10 +31,10 @@ services:
       - "IGNITE_WORK_DIR=/ignite"
       - "IGNITE_JMX_PORT=9011"
       - "CONFIG_URI=/config/server_1.xml"
-      - "OPTION_LIBS=ignite-log4j,ignite-spring,ignite-indexing,ignite-zookeeper"
+      - "OPTION_LIBS=ignite-log4j2,ignite-zookeeper"
       - >-
         JVM_OPTS=-Xms512m -Xmx512m
-        -XX:+AggressiveOpts -XX:+UseG1GC -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=128m
+        -XX:+AggressiveOpts -XX:+UseG1GC -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=256m
         -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.rmi.port=9011
         -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
     depends_on:
@@ -42,14 +43,16 @@ services:
       - ignite_network
 
   # server_2:
-  #   # image: apacheignite/ignite:2.7.6
-  #   image: gridgain/community:8.7.7
+  #   image: gridgain-community:8.7.7
+  #   # image: apacheignite/ignite:2.7.0
+  #   # image: gridgain/community:8.7.7
   #   ports:
   #     - "9012:9012"
   #     - "47102:47102"
   #     - "47502:47502"
   #     - "10802:10800"
   #     - "11212:11211"
+  #     - "5006:5006"
   #   volumes:
   #     - ./ignite:/ignite
   #     - ./config:/config
@@ -58,8 +61,12 @@ services:
   #     - "IGNITE_WORK_DIR=/ignite"
   #     - "IGNITE_JMX_PORT=9012"
   #     - "CONFIG_URI=/config/server_2.xml"
-  #     - "OPTION_LIBS=ignite-log4j,ignite-spring,ignite-indexing,ignite-zookeeper"
-  #     - "JVM_OPTS=-Xms512m -Xmx512m -XX:+AggressiveOpts -XX:+UseG1GC -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=128m -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.rmi.port=9012"
+  #     - "OPTION_LIBS=ignite-log4j2,ignite-zookeeper"
+  #     - >-
+  #       JVM_OPTS=-Xms512m -Xmx512m
+  #       -XX:+AggressiveOpts -XX:+UseG1GC -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=256m
+  #       -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.rmi.port=9012
+  #       -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006
   #   depends_on:
   #     - zookeeper
   #   networks:
