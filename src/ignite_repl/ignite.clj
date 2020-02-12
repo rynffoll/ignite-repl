@@ -1,39 +1,16 @@
 (ns ignite_repl.ignite
   (:gen-class)
-  (:import [org.apache.ignite Ignite Ignition]
-           org.apache.ignite.cluster.ClusterNode
-           org.apache.ignite.lang.IgniteCallable))
+  (:require [mount.core :refer [defstate]]
+            [ignite_repl.config :refer [config]]
+            [ignite_repl.cluster :as cluster]
+            [ignite_repl.cache :as cache])
+  (:import [org.apache.ignite Ignite Ignition]))
 
-(def ignite (atom nil))
+(defn ignite-start! [cfg]
+  (Ignition/start cfg))
 
-(defn ignite-start [c]
-  (Ignition/start c))
-
-(defn ignite-stop []
-  (Ignition/stop true))
-
-(defn- ClusterNode->map [^ClusterNode n]
-  {:id            (.id n)
-   :consistent-id (.consistentId n)
-   :order         (.order n)
-
-   :local         (.isLocal n)
-   :daemon        (.isDaemon n)
-   :client        (.isClient n)
-
-   :addresses     (.addresses n)
-   :host-names    (.hostNames n)
-   :attributes    (.attributes n)
-   :metrics       (.metrics n)
-
-   :version       (.version n)
-   })
-
-(defn cluster-nodes [^Ignite ig]
-  (->> ig
-       (.cluster)
-       (.nodes)
-       (map ClusterNode->map)))
+(defn ignite-stop! [cancel?]
+  (Ignition/stop cancel?))
 
 (defn- enum->keyword [e]
   (-> e
@@ -41,52 +18,17 @@
       .toLowerCase
       keyword))
 
-(defn ignite-state?
-  ([] (ignite-state? nil))
-  ([n] (-> (Ignition/state n)
+(defn state?
+  ([]     (state? nil))
+  ([name] (-> (Ignition/state name)
               enum->keyword)))
 
-(defn cluster-activated? [^Ignite i]
-  (.active i))
-
-(defn cluster-activate! [^Ignite i]
-  (.active i true))
-
-(defn cluster-deactivate! [^Ignite i]
-  (.active i false))
+(defstate ignite
+  :start (let [config (:ignite/config config)]
+           (ignite-start! config))
+  :stop  (ignite-stop! true))
 
 (comment
-  (set! *warn-on-reflection* true)
 
-  @ignite
 
-  (swap! ignite (fn [_] (ignite-start "resources/client_2.xml")))
-
-  (ignite-stop)
-
-  (ignite-state?)
-
-  (cluster-activated? @ignite)
-
-  (do (cluster-activate! @ignite)
-      (cluster-activated? @ignite))
-
-  (do (cluster-deactivate! @ignite)
-      (cluster-activated? @ignite))
-
-  (->> (cluster-nodes @ignite)
-       (map :consistent-id))
-
-  (-> @ignite
-      (.compute (-> @ignite
-                    .cluster
-                    .forServers))
-      (.broadcast (reify IgniteCallable
-                    (call [_]
-                      (println "::: test :::"))))
-      )
-
-  (.call (reify IgniteCallable
-           (call [_]
-             (println "::: test :::"))))
   )

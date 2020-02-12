@@ -1,1 +1,16 @@
 * Ignite REPL
+Build
+#+begin_src shell
+make jar
+#+end_src
+
+Run
+#+begin_src shell
+make run
+#+end_src
+
+Connect to REPL
+#+begin_src shell
+make repl
+#+end_src
+

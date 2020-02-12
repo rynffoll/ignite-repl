@@ -8,15 +8,23 @@
         ;; org.apache.ignite/ignite-spring {:mvn/version "2.7.0"}
         ;; org.apache.ignite/ignite-zookeeper {:mvn/version "2.7.0"}
 
-        org.gridgain/ignite-core {:mvn/version "8.7.8"}
-        org.gridgain/ignite-spring {:mvn/version "8.7.8"}
-        org.gridgain/ignite-zookeeper {:mvn/version "8.7.8"}
+        org.gridgain/ignite-core {:mvn/version "8.7.10"}
+        org.gridgain/ignite-spring {:mvn/version "8.7.10"}
+        org.gridgain/ignite-zookeeper {:mvn/version "8.7.10"}
 
-        org.clojure/tools.nrepl {:mvn/version "0.2.13"}
-        cider/cider-nrepl {:mvn/version "0.23.0-SNAPSHOT"}
+        nrepl/nrepl {:mvn/version "0.6.0"}
+        cider/cider-nrepl {:mvn/version "0.23.0"}
         refactor-nrepl {:mvn/version "2.4.0"}
 
-        integrant {:mvn/version "0.8.0-alpha2"}}
+        aero {:mvn/version "1.1.5"}
+
+        mount {:mvn/version "0.1.16"}
+
+        org.clojure/tools.deps.alpha
+        {:git/url "https://github.com/clojure/tools.deps.alpha.git"
+         :sha "d0b33e0d346736aa985c150145b332f97b92135e"
+         :exclusions [org.slf4j/slf4j-nop]}
+        }
 
  :mvn/repos
  {"GridGain External Repository"
@@ -42,23 +50,6 @@
          :main-opts ["-m" "cljfmt-runner.check"]}
   :lint/fix {:main-opts ["-m" "cljfmt-runner.fix"]}
 
-  :uberjar {:extra-deps {uberdeps {:mvn/version "0.1.4"}}
+  :uberjar {:extra-deps {uberdeps {:mvn/version "0.1.8"}}
             :main-opts ["-m" "uberdeps.uberjar"]}
-
-  :native-image
-  {:main-opts ["-m clj.native-image ignite_repl"
-               "--initialize-at-build-time"
-               ;; optional native image name override
-               "-H:Name=ignite_repl"]
-   :jvm-opts ["-Dclojure.compiler.direct-linking=true"]
-   :extra-deps
-   {clj.native-image
-    {:git/url "https://github.com/taylorwood/clj.native-image.git"
-     :sha "e480cb92b9a85913b3bcad9d878db237d810f286"}}}
-
-  :dev {:extra-paths ["env/dev"]
-        :extra-deps {org.clojure/tools.deps.alpha
-                     {:git/url "https://github.com/clojure/tools.deps.alpha.git"
-                      :sha "d0b33e0d346736aa985c150145b332f97b92135e"
-                      :exclusions [org.slf4j/slf4j-nop]}
-                     integrant/repl {:mvn/version "0.3.1"}}}}}
+  }}
