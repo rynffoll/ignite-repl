@@ -1,6 +1,6 @@
 (ns ignite_repl.cluster
   (:gen-class)
-  (:import [org.apache.ignite Ignite Ignition]
+  (:import [org.apache.ignite Ignite]
            org.apache.ignite.internal.cluster.DetachedClusterNode
            org.apache.ignite.spi.discovery.tcp.internal.TcpDiscoveryNode
            org.apache.ignite.spi.discovery.zk.internal.ZookeeperClusterNode

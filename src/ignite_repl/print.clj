@@ -1,7 +1,6 @@
 (ns ignite_repl.print
   (:gen-class)
   (:require [ignite_repl.cluster :as cluster]
-            [ignite_repl.cache :as cache]
             [clojure.pprint :as pp])
   (:import [org.apache.ignite Ignite]
            [org.apache.ignite.configuration CacheConfiguration]))

@@ -2,7 +2,7 @@
 
  :deps {org.clojure/clojure {:mvn/version "1.10.1"}
 
-        ch.qos.logback/logback-classic {:mvn/version "1.3.0-alpha4"}
+        ch.qos.logback/logback-classic {:mvn/version "1.2.3"}
 
         ;; org.apache.ignite/ignite-core {:mvn/version "2.7.0"}
         ;; org.apache.ignite/ignite-spring {:mvn/version "2.7.0"}
@@ -13,17 +13,16 @@
         org.gridgain/ignite-zookeeper {:mvn/version "8.7.10"}
 
         nrepl/nrepl {:mvn/version "0.6.0"}
-        cider/cider-nrepl {:mvn/version "0.23.0"}
+        cider/cider-nrepl {:mvn/version "0.24.0"}
         refactor-nrepl {:mvn/version "2.4.0"}
 
         aero {:mvn/version "1.1.5"}
 
         mount {:mvn/version "0.1.16"}
 
-        org.clojure/tools.deps.alpha
-        {:git/url "https://github.com/clojure/tools.deps.alpha.git"
-         :sha "d0b33e0d346736aa985c150145b332f97b92135e"
-         :exclusions [org.slf4j/slf4j-nop]}
+        ;; org.clojure/tools.deps.alpha
+        ;; {:git/url "https://github.com/clojure/tools.deps.alpha.git"
+        ;;  :sha "64a1ee2a7bc336fe026d35f406374238d8f44af3"}
         }
 
  :mvn/repos
@@ -49,6 +48,10 @@
                        :sha "d6952345b3047e03ca3a88f89a1433c109b7b442"}}
          :main-opts ["-m" "cljfmt-runner.check"]}
   :lint/fix {:main-opts ["-m" "cljfmt-runner.fix"]}
+
+  :clj-kondo {:extra-deps {clj-kondo {:mvn/version "RELEASE"}}
+              :main-opts ["-m" "clj-kondo.main"
+                          "--lint" "."]}
 
   :uberjar {:extra-deps {uberdeps {:mvn/version "0.1.8"}}
             :main-opts ["-m" "uberdeps.uberjar"]}

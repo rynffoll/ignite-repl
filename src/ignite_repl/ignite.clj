@@ -1,10 +1,8 @@
 (ns ignite_repl.ignite
   (:gen-class)
   (:require [mount.core :refer [defstate]]
-            [ignite_repl.config :refer [config]]
-            [ignite_repl.cluster :as cluster]
-            [ignite_repl.cache :as cache])
-  (:import [org.apache.ignite Ignite Ignition]))
+            [ignite_repl.config :refer [config]])
+  (:import [org.apache.ignite Ignition]))
 
 (defn ignite-start! [cfg]
   (Ignition/start cfg))
@@ -27,8 +25,3 @@
   :start (let [config (:ignite/config config)]
            (ignite-start! config))
   :stop  (ignite-stop! true))
-
-(comment
-
-
-  )
