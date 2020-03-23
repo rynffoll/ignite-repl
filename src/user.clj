@@ -25,21 +25,24 @@
 
   (mount/stop #'ignite)
 
-  (cluster/activated? ignite)
+  (cluster/activated?)
 
-  (cluster/activate! ignite)
+  (cluster/activate!)
 
-  (cluster/deactivate! ignite)
+  (cluster/deactivate!)
 
-  (cluster/topology ignite)
+  (cluster/topology-version)
 
-  (cluster/baseline ignite)
+  (cluster/topology (cluster/topology-version))
+
+  (cluster/topology)
+
+  (cluster/baseline)
   
-  (cluster/caches ignite)
+  (cluster/caches)
 
   (def test-cache
-    (cache/get-or-create ignite
-                         (org.apache.ignite.configuration.CacheConfiguration. "test")))
+    (cache/get-or-create (org.apache.ignite.configuration.CacheConfiguration. "test")))
 
   (doseq [k (range 0 1000)]
     (cache/put test-cache (str "key_" k) (str "value_" k)))
@@ -57,10 +60,12 @@
 
   (cache/destroy! test-cache)
 
-  (print/topology ignite [:id :consistent-id])
+  (print/topology [:id :consistent-id])
 
-  (print/baseline ignite [:id :consistent-id :online?])
+  (print/baseline [:id :consistent-id :online?])
 
-  (print/caches ignite)
+  (print/caches)
+
+  (print/binary-types)
 
 )

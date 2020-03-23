@@ -8,9 +8,9 @@
         ;; org.apache.ignite/ignite-spring {:mvn/version "2.7.0"}
         ;; org.apache.ignite/ignite-zookeeper {:mvn/version "2.7.0"}
 
-        org.gridgain/ignite-core {:mvn/version "8.7.10"}
-        org.gridgain/ignite-spring {:mvn/version "8.7.10"}
-        org.gridgain/ignite-zookeeper {:mvn/version "8.7.10"}
+        org.gridgain/ignite-core {:mvn/version "8.7.13"}
+        org.gridgain/ignite-spring {:mvn/version "8.7.13"}
+        org.gridgain/ignite-zookeeper {:mvn/version "8.7.13"}
 
         nrepl/nrepl {:mvn/version "0.6.0"}
         cider/cider-nrepl {:mvn/version "0.24.0"}

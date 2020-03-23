@@ -1,28 +1,32 @@
 (ns ignite_repl.print
   (:gen-class)
   (:require [ignite_repl.cluster :as cluster]
+            [ignite_repl.cache :as cache]
+            [ignite_repl.binary :as binary]
+            [ignite_repl.mapper :as m]
             [clojure.pprint :as pp])
   (:import [org.apache.ignite Ignite]
            [org.apache.ignite.configuration CacheConfiguration]))
 
-(defn topology [^Ignite ig keys]
-  (->> ig
-       cluster/topology
+(defn topology [keys]
+  (->> (cluster/topology)
        (map #(select-keys % keys))
        pp/print-table))
 
-(defn baseline [^Ignite ig keys]
-  (let [online (set (map :consistent-id (cluster/topology ig)))]
-    (->> ig
-         cluster/baseline
+(defn baseline [keys]
+  (let [online (set (map :consistent-id (cluster/topology)))]
+    (->> (cluster/baseline)
          (map #(merge % {:online? (contains? online (:consistent-id %))}))
          (map #(select-keys % keys))
          pp/print-table)))
 
-(defn caches [^Ignite ig]
-  (->> ig
-       cluster/caches
-       (map #(.cache ig %))
+(defn caches []
+  (->> (cluster/caches)
+       (map #(cache/cache %))
        (map #(.getConfiguration % CacheConfiguration))
-       (map cluster/->map)
+       (map m/->map)
        pp/print-table))
+
+(defn binary-types []
+  (-> (binary/types)
+      pp/print-table))

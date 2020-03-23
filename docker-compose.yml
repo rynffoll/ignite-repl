@@ -1,13 +1,19 @@
 version: '3'
 
 services:
+  app:
+    # build: .
+    image: ignite-repl
+    ports:
+      - "3333:3333"
+
   zookeeper:
     image: zookeeper
     ports:
       - "2181:2181"
 
   server_1:
-    image: gridgain-community:8.7.10
+    image: gridgain-community:8.7.13
     # image: apacheignite/ignite:2.7.0
     # image: gridgain/community:8.7.7
     ports:
@@ -35,7 +41,7 @@ services:
       - zookeeper
 
   server_2:
-    image: gridgain-community:8.7.10
+    image: gridgain-community:8.7.13
     # image: apacheignite/ignite:2.7.0
     # image: gridgain/community:8.7.7
     ports:

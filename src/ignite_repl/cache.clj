@@ -1,17 +1,21 @@
 (ns ignite_repl.cache
   (:gen-class)
   (:refer-clojure :exclude [get remove contains?])
-  (:import [org.apache.ignite Ignite IgniteCache]
+  (:require [ignite_repl.ignite :refer [ignite]])
+  (:import [org.apache.ignite IgniteCache]
            [org.apache.ignite.cache CachePeekMode]))
 
-(defn get-or-create [^Ignite ig cfg]
-  (.getOrCreateCache ig cfg))
+(defn get-or-create [cfg]
+  (-> ignite
+      (.getOrCreateCache cfg)))
 
-(defn create [^Ignite ig cfg]
-  (.createCache ig cfg))
+(defn create [cfg]
+  (-> ignite
+      (.createCache cfg)))
 
-(defn cache [^Ignite ig name]
-  (.cache ig name))
+(defn cache [name]
+  (-> ignite
+      (.cache name)))
 
 (defn size
   ([^IgniteCache c]
