@@ -34,9 +34,11 @@
    (topology (topology-version))))
 
 (defn baseline []
-  (-> (cluster)
-      .currentBaselineTopology
-      (->> (map m/->map))))
+  (let [online (set (map :consistent-id (topology)))]
+    (-> (cluster)
+        .currentBaselineTopology
+        (->> (map m/->map)
+             (map #(assoc % :online? (contains? online (:consistent-id %))))))))
 
 (defn caches []
   (-> ignite

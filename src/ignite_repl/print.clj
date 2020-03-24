@@ -5,8 +5,7 @@
             [ignite_repl.binary :as binary]
             [ignite_repl.mapper :as m]
             [clojure.pprint :as pp])
-  (:import [org.apache.ignite Ignite]
-           [org.apache.ignite.configuration CacheConfiguration]))
+  (:import [org.apache.ignite.configuration CacheConfiguration]))
 
 (defn topology [keys]
   (->> (cluster/topology)
@@ -14,19 +13,22 @@
        pp/print-table))
 
 (defn baseline [keys]
-  (let [online (set (map :consistent-id (cluster/topology)))]
-    (->> (cluster/baseline)
-         (map #(merge % {:online? (contains? online (:consistent-id %))}))
-         (map #(select-keys % keys))
-         pp/print-table)))
+  (->> (cluster/baseline)
+       (map #(select-keys % keys))
+       pp/print-table))
 
-(defn caches []
+(defn- cache-configs []
   (->> (cluster/caches)
        (map #(cache/cache %))
        (map #(.getConfiguration % CacheConfiguration))
-       (map m/->map)
+       (map m/->map)))
+
+(defn caches [keys]
+  (->> (cache-configs)
+       (map #(select-keys % keys))
        pp/print-table))
 
-(defn binary-types []
-  (-> (binary/types)
-      pp/print-table))
+(defn binary-types [keys]
+  (->> (binary/types)
+       (map #(select-keys % keys))
+       pp/print-table))

@@ -14,16 +14,17 @@
    :consistent-id (.consistentId n)
    :order         (.order n)
 
-   :local         (.isLocal n)
-   :daemon        (.isDaemon n)
-   :client        (.isClient n)
+   :local?        (.isLocal n)
+   :daemon?       (.isDaemon n)
+   :client?       (.isClient n)
 
    :addresses     (.addresses n)
    :host-names    (.hostNames n)
    :attributes    (.attributes n)
    :metrics       (.metrics n)
 
-   :version       (.version n)})
+   :version       (.version n)
+   })
 
 (defmethod ->map ZookeeperClusterNode
   [^ZookeeperClusterNode n]
@@ -31,38 +32,47 @@
    :consistent-id (.consistentId n)
    :order         (.order n)
 
-   :local         (.isLocal n)
-   :daemon        (.isDaemon n)
-   :client        (.isClient n)
+   :local?        (.isLocal n)
+   :daemon?       (.isDaemon n)
+   :client?       (.isClient n)
 
    :addresses     (.addresses n)
    :host-names    (.hostNames n)
    :attributes    (.attributes n)
    :metrics       (.metrics n)
 
-   :version       (.version n)})
+   :version       (.version n)
+   })
 
 (defmethod ->map DetachedClusterNode
   [^DetachedClusterNode n]
   {:id            (.id n)
    :consistent-id (.consistentId n)
 
-   :local         (.isLocal n)
-   :daemon        (.isDaemon n)
-   :client        (.isClient n)
+   :local?        (.isLocal n)
+   :daemon?       (.isDaemon n)
+   :client?       (.isClient n)
 
-   :attributes    (.attributes n)})
+   :attributes    (.attributes n)
+   })
 
 (defmethod ->map CacheConfiguration
   [^CacheConfiguration c]
   {:name                       (.getName c)
-   :data-region-name           (.getDataRegionName c)
 
+   :cache-mode                 (.getCacheMode c)
    :atomicity-mode             (.getAtomicityMode c)
+
    :write-synchronization-mode (.getWriteSynchronizationMode c)
    :backups                    (.getBackups c)
+   :read-from-backup?          (.isReadFromBackup c)
 
-   :partition-loss-policy      (.getPartitionLossPolicy c)})
+   :data-region-name           (.getDataRegionName c)
+
+   :partition-loss-policy      (.getPartitionLossPolicy c)
+
+   :affinity                   (.getAffinity c)
+   })
 
 (defmethod ->map BinaryTypeImpl
   [^BinaryTypeImpl b]
@@ -72,4 +82,5 @@
    :field-names (.fieldNames b)
 
    :enum?       (.isEnum b)
-   :enum-values (.enumValues b)})
+   :enum-values (.enumValues b)
+   })
