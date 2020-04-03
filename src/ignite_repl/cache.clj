@@ -44,3 +44,11 @@
 
 (defn destroy! [^IgniteCache c]
   (.destroy c))
+
+(defn lost-partitions [^IgniteCache c]
+  (-> (.lostPartitions c)
+      vec))
+
+(defn reset-lost-partitions! [cache-names]
+  (-> ignite
+      (.resetLostPartitions cache-names)))
