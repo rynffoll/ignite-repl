@@ -13,6 +13,12 @@
     <property name="consistentId" value="server_1"/>
     <property name="peerClassLoadingEnabled" value="true"/>
 
+        <property name="userAttributes">
+            <map>
+                <entry key="dc" value="dc1"/>
+            </map>
+        </property>
+
     <property name="dataStorageConfiguration">
       <bean class="org.apache.ignite.configuration.DataStorageConfiguration">
         <property name="defaultDataRegionConfiguration">

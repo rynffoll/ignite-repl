@@ -33,6 +33,9 @@
 (defn get [^IgniteCache c k]
   (.get c k))
 
+(defn get-all [^IgniteCache c ks]
+  (.getAll c (into #{} ks)))
+
 (defn put [^IgniteCache c k v]
   (.put c k v))
 
@@ -52,3 +55,18 @@
 (defn reset-lost-partitions! [cache-names]
   (-> ignite
       (.resetLostPartitions cache-names)))
+
+(defn wal? [name]
+  (-> ignite
+      .cluster
+      (.isWalEnabled name)))
+
+(defn enable-wal! [name]
+  (-> ignite
+      .cluster
+      (.enableWal name)))
+
+(defn disable-wal! [name]
+  (-> ignite
+      .cluster
+      (.disableWal name)))

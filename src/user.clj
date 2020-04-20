@@ -42,45 +42,60 @@
 
   (cluster/caches)
 
-  (def test-cache
+  (def mem-cache
     (cache/get-or-create
      (-> (org.apache.ignite.configuration.CacheConfiguration.)
-         (.setName "test")
+         (.setName "mem")
          (.setBackups 1))))
 
   (doseq [k (range 0 1000)]
-    (cache/put test-cache (str "key_" k) (str "value_" k)))
+    (cache/put mem-cache (str "key_" k) (str "value_" k)))
 
-  (map #(cache/get test-cache (str "key_" %))
+  (map #(cache/get mem-cache (str "key_" %))
        (range 0 10))
 
-  (cache/size test-cache)
+  (cache/get-all mem-cache (map #(str "key_" %) (range 0 10)))
 
-  (cache/size test-cache [:primary :backup])
+  (cache/size mem-cache)
 
-  (cache/size test-cache [:backup])
+  (cache/size mem-cache [:primary :backup])
 
-  (cache/remove test-cache "key_0")
+  (cache/size mem-cache [:backup])
 
-  (cache/destroy! test-cache)
+  (cache/remove mem-cache "key_0")
 
-  (->> (affinity/map-partitions-to-nodes "test" [0 1])
+  (cache/destroy! mem-cache)
+
+  (->> (affinity/map-partitions-to-nodes "mem" [0 1])
        (reduce-kv (fn [m k v]
                     (assoc m k (select-keys v [:consistent-id])))
                   {}))
 
-  (->> (affinity/map-partition-to-primary-and-backups "test" 0)
+  (->> (affinity/map-partition-to-primary-and-backups "mem" 0)
        (map #(select-keys % [:consistent-id])))
 
-  (->> (affinity/map-key-to-primary-and-backups "test" "key_0")
+  (->> (affinity/map-key-to-primary-and-backups "mem" "key_0")
        (map #(select-keys % [:consistent-id])))
 
-  (affinity/partitions "test")
+  (affinity/partitions "mem")
 
-  (affinity/partition "test" "key_0")
+  (affinity/partition "mem" "key_0")
 
-  (->> (affinity/map-key-to-primary-and-backups "test" "key_0")
+  (->> (affinity/map-key-to-primary-and-backups "mem" "key_0")
        (map #(select-keys % [:consistent-id])))
+
+  (def disk-cache
+    (cache/get-or-create
+     (-> (org.apache.ignite.configuration.CacheConfiguration.)
+         (.setName "disk")
+         (.setDataRegionName "Persistence Region")
+         (.setBackups 1))))
+
+  (cache/wal? "disk")
+
+  (cache/enable-wal! "disk")
+
+  (cache/disable-wal! "disk")
 
   (print/topology [:id
                    :consistent-id
@@ -100,7 +115,7 @@
 
                  :write-synchronization-mode
                  :backups
-                 :read-from-backup?
+                 ;; :read-from-backup?
 
                  :data-region-name
 
@@ -110,10 +125,48 @@
   (print/binary-types [:type-id
                        :type-name
 
-                       :field-names
+                       ;; :field-names
 
-                       :enum?
-                       :enum-values
+                       ;; :enum?
+                       ;; :enum-values
                        ])
+
+  (defn template [cn dr]
+    (cache/get-or-create
+     (-> (org.apache.ignite.configuration.CacheConfiguration.)
+         (.setName cn)
+         (.setBackups 1)
+         (.setDataRegionName dr)
+         (.setWriteSynchronizationMode org.apache.ignite.cache.CacheWriteSynchronizationMode/FULL_SYNC)
+         (.setPartitionLossPolicy org.apache.ignite.cache.PartitionLossPolicy/READ_ONLY_SAFE)
+         (.setAffinity
+          (-> (org.apache.ignite.cache.affinity.rendezvous.RendezvousAffinityFunction.)
+              (.setAffinityBackupFilter
+               (org.apache.ignite.cache.affinity.rendezvous.ClusterNodeAttributeAffinityBackupFilter. (into-array java.lang.String ["dc"])))))
+         )))
+
+  (def p-cache (template "p-cache" "Persistence Region"))
+
+  (def m-cache (template "m-cache" "Memory Region"))
+
+  (doseq [k (range 0 1000)]
+    (cache/put p-cache (str "pk_" k) (str "pv_" k))
+    (cache/put m-cache (str "mk_" k) (str "mv_" k)))
+
+  (doseq [k (range 0 1000)]
+    (println (cache/get p-cache (str "pk_" k))
+             (cache/get m-cache (str "mk_" k))))
+
+  (cache/size p-cache)
+
+  (cache/size m-cache)
+
+  (cache/destroy! p-cache)
+
+  (cache/destroy! m-cache)
+
+  (cache/lost-partitions p-cache)
+
+  (cache/lost-partitions m-cache)
 
 )
