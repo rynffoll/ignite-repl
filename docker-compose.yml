@@ -13,7 +13,8 @@ services:
       - "2181:2181"
 
   server_1:
-    image: gridgain-community:8.7.14
+    image: gridgain/community:8.7.14-openjdk11
+    # image: gridgain/community:8.7.14-openjdk11-slim
     # image: apacheignite/ignite:2.8.0
     ports:
       - "9011:9011"
@@ -40,7 +41,8 @@ services:
       - zookeeper
 
   server_2:
-    image: gridgain-community:8.7.14
+    image: gridgain/community:8.7.14-openjdk11
+    # image: gridgain/community:8.7.14-openjdk11-slim
     # image: apacheignite/ignite:2.8.0
     ports:
       - "9012:9012"
