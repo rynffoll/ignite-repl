@@ -10,12 +10,12 @@
 
   <bean class="org.apache.ignite.configuration.IgniteConfiguration">
 
-    <property name="consistentId" value="server_2"/>
+    <property name="consistentId" value="#{systemEnvironment.CONSISTENT_ID}"/>
     <property name="peerClassLoadingEnabled" value="true"/>
 
         <property name="userAttributes">
             <map>
-                <entry key="dc" value="dc2"/>
+                <entry key="dc" value="#{systemEnvironment.DC}"/>
             </map>
         </property>
 
@@ -24,7 +24,7 @@
         <property name="defaultDataRegionConfiguration">
           <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
             <property name="name" value="Memory Region"/>
-              <property name="maxSize" value="#{500L * 1024 * 1024}"/>
+            <property name="maxSize" value="#{500L * 1024 * 1024}"/>
           </bean>
         </property>
 
@@ -42,7 +42,7 @@
 
     <property name="communicationSpi">
       <bean class="org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi">
-        <property name="localPort" value="47102"/>
+        <property name="localPort" value="#{systemEnvironment.PORT}"/>
         <property name="localPortRange" value="0"/>
       </bean>
     </property>
@@ -55,6 +55,13 @@
         <property name="joinTimeout" value="10000"/>
       </bean>
     </property>
+
+    <property name="gridLogger">
+      <bean class="org.apache.ignite.logger.log4j2.Log4J2Logger">
+        <constructor-arg type="java.lang.String" value="/config/log4j2.xml"/>
+      </bean>
+    </property>
+
   </bean>
 
 </beans>

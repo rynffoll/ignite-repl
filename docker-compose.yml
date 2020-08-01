@@ -1,11 +1,11 @@
 version: '3'
 
 services:
-  app:
-    # build: .
-    image: ignite-repl
-    ports:
-      - "3333:3333"
+  # app:
+  #   # build: .
+  #   image: ignite-repl
+  #   ports:
+  #     - "3333:3333"
 
   zookeeper:
     image: zookeeper
@@ -27,10 +27,14 @@ services:
       - ./ignite:/ignite
       - ./config:/config
     environment:
+      - "CONSISTENT_ID=server_1"
+      - "DC=dc1"
+      - "PORT=47101"
+
       - "IGNITE_QUIET=false"
       - "IGNITE_WORK_DIR=/ignite"
       - "IGNITE_JMX_PORT=9011"
-      - "CONFIG_URI=/config/server_1.xml"
+      - "CONFIG_URI=/config/server.xml"
       - "OPTION_LIBS=ignite-log4j2,ignite-zookeeper"
       - >-
         JVM_OPTS=-Xms512m -Xmx512m
@@ -55,10 +59,14 @@ services:
       - ./ignite:/ignite
       - ./config:/config
     environment:
+      - "CONSISTENT_ID=server_2"
+      - "DC=dc2"
+      - "PORT=47102"
+
       - "IGNITE_QUIET=false"
       - "IGNITE_WORK_DIR=/ignite"
       - "IGNITE_JMX_PORT=9012"
-      - "CONFIG_URI=/config/server_2.xml"
+      - "CONFIG_URI=/config/server.xml"
       - "OPTION_LIBS=ignite-log4j2,ignite-zookeeper"
       - >-
         JVM_OPTS=-Xms512m -Xmx512m
