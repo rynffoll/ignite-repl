@@ -56,12 +56,6 @@
       </bean>
     </property>
 
-    <property name="gridLogger">
-      <bean class="org.apache.ignite.logger.log4j2.Log4J2Logger">
-        <constructor-arg type="java.lang.String" value="/config/log4j2.xml"/>
-      </bean>
-    </property>
-
   </bean>
 
 </beans>

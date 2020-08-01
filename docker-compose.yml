@@ -13,7 +13,7 @@ services:
       - "2181:2181"
 
   server_1:
-    image: gridgain/community:8.7.14-openjdk11
+    image: gridgain/community:8.7.22-openjdk11
     # image: gridgain/community:8.7.14-openjdk11-slim
     # image: apacheignite/ignite:2.8.0
     ports:
@@ -35,7 +35,7 @@ services:
       - "IGNITE_WORK_DIR=/ignite"
       - "IGNITE_JMX_PORT=9011"
       - "CONFIG_URI=/config/server.xml"
-      - "OPTION_LIBS=ignite-log4j2,ignite-zookeeper"
+      - "OPTION_LIBS=ignite-zookeeper"
       - >-
         JVM_OPTS=-Xms512m -Xmx512m
         -XX:+AggressiveOpts -XX:+UseG1GC -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=256m
@@ -45,7 +45,7 @@ services:
       - zookeeper
 
   server_2:
-    image: gridgain/community:8.7.14-openjdk11
+    image: gridgain/community:8.7.22-openjdk11
     # image: gridgain/community:8.7.14-openjdk11-slim
     # image: apacheignite/ignite:2.8.0
     ports:
@@ -67,7 +67,7 @@ services:
       - "IGNITE_WORK_DIR=/ignite"
       - "IGNITE_JMX_PORT=9012"
       - "CONFIG_URI=/config/server.xml"
-      - "OPTION_LIBS=ignite-log4j2,ignite-zookeeper"
+      - "OPTION_LIBS=ignite-zookeeper"
       - >-
         JVM_OPTS=-Xms512m -Xmx512m
         -XX:+AggressiveOpts -XX:+UseG1GC -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=256m
