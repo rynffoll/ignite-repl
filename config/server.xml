@@ -33,7 +33,7 @@
             <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
               <property name="name" value="Persistence Region"/>
               <property name="maxSize" value="#{500L * 1024 * 1024}"/>
-              <property name="persistenceEnabled" value="true"/>
+              <property name="persistenceEnabled" value="false"/>
             </bean>
           </list>
         </property>
