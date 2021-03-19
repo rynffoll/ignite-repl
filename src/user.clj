@@ -169,4 +169,6 @@
 
   (cache/lost-partitions m-cache)
 
+  (map #(cache/destroy! (cache/cache %)) (cluster/caches))
+
 )

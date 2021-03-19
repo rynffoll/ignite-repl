@@ -1,24 +1,24 @@
 {:paths ["resources" "src"]
 
- :deps {org.clojure/clojure {:mvn/version "1.10.2"}
+ :deps {org.clojure/clojure {:mvn/version "1.10.3"}
 
         ch.qos.logback/logback-classic {:mvn/version "1.2.3"}
 
-        org.apache.ignite/ignite-core {:mvn/version "2.9.1"}
-        org.apache.ignite/ignite-spring {:mvn/version "2.9.1"}
-        org.apache.ignite/ignite-zookeeper {:mvn/version "2.9.1"}
+        org.apache.ignite/ignite-core {:mvn/version "2.10.0"}
+        org.apache.ignite/ignite-spring {:mvn/version "2.10.0"}
+        org.apache.ignite/ignite-zookeeper {:mvn/version "2.10.0"}
 
-        ;; org.gridgain/ignite-core {:mvn/version "8.7.22"}
-        ;; org.gridgain/ignite-spring {:mvn/version "8.7.22"}
-        ;; org.gridgain/ignite-zookeeper {:mvn/version "8.7.22"}
+        ;; org.gridgain/ignite-core {:mvn/version "8.8.2"}
+        ;; org.gridgain/ignite-spring {:mvn/version "8.8.2"}
+        ;; org.gridgain/ignite-zookeeper {:mvn/version "8.8.2"}
 
         nrepl/nrepl {:mvn/version "0.8.3"}
-        cider/cider-nrepl {:mvn/version "0.25.8"}
-        refactor-nrepl {:mvn/version "2.5.0"}
+        cider/cider-nrepl {:mvn/version "0.25.9"}
+        refactor-nrepl/refactor-nrepl {:mvn/version "2.5.1"}
 
-        aero {:mvn/version "1.1.6"}
+        aero/aero {:mvn/version "1.1.6"}
 
-        mount {:mvn/version "0.1.16"}
+        mount/mount {:mvn/version "0.1.16"}
 
         ;; org.clojure/tools.deps.alpha
         ;; {:git/url "https://github.com/clojure/tools.deps.alpha.git"
@@ -40,19 +40,16 @@
    :main-opts ["-m" "cognitect.test-runner"
                "-d" "test"]}
 
-  :outdated {:extra-deps {olical/depot {:mvn/version "1.8.4"}}
-             :main-opts ["-m" "depot.outdated.main"]}
-
   :lint {:extra-deps {com.jameslaverack/cljfmt-runner
                       {:git/url "https://github.com/JamesLaverack/cljfmt-runner"
                        :sha "d6952345b3047e03ca3a88f89a1433c109b7b442"}}
          :main-opts ["-m" "cljfmt-runner.check"]}
   :lint/fix {:main-opts ["-m" "cljfmt-runner.fix"]}
 
-  :clj-kondo {:extra-deps {clj-kondo {:mvn/version "RELEASE"}}
+  :clj-kondo {:extra-deps {clj-kondo/clj-kondo {:mvn/version "RELEASE"}}
               :main-opts ["-m" "clj-kondo.main"
                           "--lint" "."]}
 
-  :uberjar {:extra-deps {uberdeps {:mvn/version "0.1.8"}}
+  :uberjar {:extra-deps {uberdeps/uberdeps {:mvn/version "0.1.8"}}
             :main-opts ["-m" "uberdeps.uberjar"]}
   }}

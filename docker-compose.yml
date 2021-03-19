@@ -15,7 +15,7 @@ services:
   server_1:
     # image: gridgain/community:8.7.22-openjdk11
     # image: gridgain/community:8.7.14-openjdk11-slim
-    image: apacheignite/ignite:2.9.1
+    image: apacheignite/ignite:2.10.0
     ports:
       - "9011:9011"
       - "47101:47101"
@@ -47,7 +47,7 @@ services:
   server_2:
     # image: gridgain/community:8.7.22-openjdk11
     # image: gridgain/community:8.7.14-openjdk11-slim
-    image: apacheignite/ignite:2.9.1
+    image: apacheignite/ignite:2.10.0
     ports:
       - "9012:9012"
       - "47102:47102"
