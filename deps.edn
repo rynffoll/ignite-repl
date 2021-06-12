@@ -8,12 +8,12 @@
         ;; org.apache.ignite/ignite-spring {:mvn/version "2.10.0"}
         ;; org.apache.ignite/ignite-zookeeper {:mvn/version "2.10.0"}
 
-        org.gridgain/ignite-core {:mvn/version "8.8.4"}
-        org.gridgain/ignite-spring {:mvn/version "8.8.4"}
-        org.gridgain/ignite-zookeeper {:mvn/version "8.8.4"}
+        org.gridgain/ignite-core {:mvn/version "8.8.5"}
+        org.gridgain/ignite-spring {:mvn/version "8.8.5"}
+        org.gridgain/ignite-zookeeper {:mvn/version "8.8.5"}
 
         nrepl/nrepl {:mvn/version "0.8.3"}
-        cider/cider-nrepl {:mvn/version "0.25.9"}
+        cider/cider-nrepl {:mvn/version "0.26.0"}
         refactor-nrepl/refactor-nrepl {:mvn/version "2.5.1"}
 
         aero/aero {:mvn/version "1.1.6"}
@@ -36,13 +36,13 @@
   :runner
   {:extra-deps {com.cognitect/test-runner
                 {:git/url "https://github.com/cognitect-labs/test-runner"
-                 :sha "cb96e80f6f3d3b307c59cbeb49bb0dcb3a2a780b"}}
+                 :sha "62ef1de18e076903374306060ac0e8a752e57c86"}}
    :main-opts ["-m" "cognitect.test-runner"
                "-d" "test"]}
 
   :lint {:extra-deps {com.jameslaverack/cljfmt-runner
                       {:git/url "https://github.com/JamesLaverack/cljfmt-runner"
-                       :sha "d6952345b3047e03ca3a88f89a1433c109b7b442"}}
+                       :sha "6383fbb0bd22a21c0edf5b699425504d9f0a958a"}}
          :main-opts ["-m" "cljfmt-runner.check"]}
   :lint/fix {:main-opts ["-m" "cljfmt-runner.fix"]}
 
@@ -50,6 +50,6 @@
               :main-opts ["-m" "clj-kondo.main"
                           "--lint" "."]}
 
-  :uberjar {:extra-deps {uberdeps/uberdeps {:mvn/version "0.1.8"}}
+  :uberjar {:extra-deps {uberdeps/uberdeps {:mvn/version "1.0.4"}}
             :main-opts ["-m" "uberdeps.uberjar"]}
   }}
