@@ -12,7 +12,7 @@
   ;; http://insideclojure.org/2018/05/04/add-lib/
   (require '[clojure.tools.deps.alpha.repl :refer [add-lib]])
 
-  (add-lib 'aero {:mvn/version "1.1.3"})
+  (add-lib 'aero {:mvn/version "1.1.6"})
 
   (mount/start #'config)
 

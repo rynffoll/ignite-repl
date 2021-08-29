@@ -2,15 +2,15 @@
 
  :deps {org.clojure/clojure {:mvn/version "1.10.3"}
 
-        ch.qos.logback/logback-classic {:mvn/version "1.2.3"}
+        ch.qos.logback/logback-classic {:mvn/version "1.2.5"}
 
         ;; org.apache.ignite/ignite-core {:mvn/version "2.10.0"}
         ;; org.apache.ignite/ignite-spring {:mvn/version "2.10.0"}
         ;; org.apache.ignite/ignite-zookeeper {:mvn/version "2.10.0"}
 
-        org.gridgain/ignite-core {:mvn/version "8.8.5"}
-        org.gridgain/ignite-spring {:mvn/version "8.8.5"}
-        org.gridgain/ignite-zookeeper {:mvn/version "8.8.5"}
+        org.gridgain/ignite-core {:mvn/version "8.8.7"}
+        org.gridgain/ignite-spring {:mvn/version "8.8.7"}
+        org.gridgain/ignite-zookeeper {:mvn/version "8.8.7"}
 
         nrepl/nrepl {:mvn/version "0.8.3"}
         cider/cider-nrepl {:mvn/version "0.26.0"}
@@ -36,7 +36,7 @@
   :runner
   {:extra-deps {com.cognitect/test-runner
                 {:git/url "https://github.com/cognitect-labs/test-runner"
-                 :sha "62ef1de18e076903374306060ac0e8a752e57c86"}}
+                 :sha "e7660458ce25bc4acb4ccc3e2415aae0a4907198"}}
    :main-opts ["-m" "cognitect.test-runner"
                "-d" "test"]}
 

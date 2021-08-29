@@ -13,7 +13,7 @@ services:
       - "2181:2181"
 
   server_1:
-    image: gridgain/community:8.8.4-openjdk11
+    image: gridgain/community:8.8.7-openjdk11
     # image: apacheignite/ignite:2.10.0
     ports:
       - "9011:9011"
@@ -36,7 +36,9 @@ services:
       - "OPTION_LIBS=ignite-zookeeper"
       - >-
         JVM_OPTS=-Xms512m -Xmx512m
-        -XX:+AggressiveOpts -XX:+UseG1GC -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=256m
+        -XX:+AggressiveOpts
+        -XX:+UseG1GC
+        -XX:MaxDirectMemorySize=256m
         -Dcom.sun.management.jmxremote
         -Dcom.sun.management.jmxremote.port=9011
         -Dcom.sun.management.jmxremote.rmi.port=9011
@@ -49,7 +51,7 @@ services:
       - zookeeper
 
   server_2:
-    image: gridgain/community:8.8.4-openjdk11
+    image: gridgain/community:8.8.7-openjdk11
     # image: apacheignite/ignite:2.10.0
     ports:
       - "9012:9012"
@@ -72,7 +74,9 @@ services:
       - "OPTION_LIBS=ignite-zookeeper"
       - >-
         JVM_OPTS=-Xms512m -Xmx512m
-        -XX:+AggressiveOpts -XX:+UseG1GC -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=256m
+        -XX:+AggressiveOpts
+        -XX:+UseG1GC
+        -XX:MaxDirectMemorySize=256m
         -Dcom.sun.management.jmxremote
         -Dcom.sun.management.jmxremote.port=9012
         -Dcom.sun.management.jmxremote.rmi.port=9012
