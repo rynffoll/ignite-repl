@@ -8,9 +8,9 @@
         ;; org.apache.ignite/ignite-spring {:mvn/version "2.10.0"}
         ;; org.apache.ignite/ignite-zookeeper {:mvn/version "2.10.0"}
 
-        org.gridgain/ignite-core {:mvn/version "8.8.7"}
-        org.gridgain/ignite-spring {:mvn/version "8.8.7"}
-        org.gridgain/ignite-zookeeper {:mvn/version "8.8.7"}
+        org.gridgain/ignite-core {:mvn/version "8.8.20"}
+        org.gridgain/ignite-spring {:mvn/version "8.8.20"}
+        org.gridgain/ignite-zookeeper {:mvn/version "8.8.20"}
 
         nrepl/nrepl {:mvn/version "0.8.3"}
         cider/cider-nrepl {:mvn/version "0.26.0"}
@@ -27,7 +27,7 @@
 
  :mvn/repos
  {"GridGain External Repository"
-  {:url "http://www.gridgainsystems.com/nexus/content/repositories/external"}}
+  {:url "https://www.gridgainsystems.com/nexus/content/repositories/external"}}
 
  :aliases
  {:test {:extra-paths ["test"]
