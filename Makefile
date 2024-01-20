@@ -1,4 +1,4 @@
-.PHONY: all $(MAKECMDGOALS)
+MAKEFLAGS += --always-make
 
 all:
 

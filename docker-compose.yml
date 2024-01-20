@@ -13,9 +13,9 @@ services:
       - "2181:2181"
 
   server_1:
-    image: rynffoll/gridgain-community:8.8.20
+    # image: rynffoll/gridgain-community:8.8.20
     # image: gridgain/community:8.8.7-openjdk11
-    # image: apacheignite/ignite:2.10.0
+    image: apacheignite/ignite:2.16.0-jdk11-arm64
     ports:
       - "9011:9011"
       - "47101:47101"
@@ -52,9 +52,9 @@ services:
       - zookeeper
 
   server_2:
-    image: rynffoll/gridgain-community:8.8.20
+    # image: rynffoll/gridgain-community:8.8.20
     # image: gridgain/community:8.8.7-openjdk11
-    # image: apacheignite/ignite:2.10.0
+    image: apacheignite/ignite:2.16.0-jdk11-arm64
     ports:
       - "9012:9012"
       - "47102:47102"

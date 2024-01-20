@@ -15,7 +15,6 @@
    :order         (.order n)
 
    :local?        (.isLocal n)
-   :daemon?       (.isDaemon n)
    :client?       (.isClient n)
 
    :addresses     (.addresses n)
@@ -33,7 +32,6 @@
    :order         (.order n)
 
    :local?        (.isLocal n)
-   :daemon?       (.isDaemon n)
    :client?       (.isClient n)
 
    :addresses     (.addresses n)
@@ -50,7 +48,6 @@
    :consistent-id (.consistentId n)
 
    :local?        (.isLocal n)
-   :daemon?       (.isDaemon n)
    :client?       (.isClient n)
 
    :attributes    (.attributes n)

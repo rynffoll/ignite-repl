@@ -2,19 +2,19 @@
 
  :deps {org.clojure/clojure {:mvn/version "1.11.1"}
 
-        ch.qos.logback/logback-classic {:mvn/version "1.4.8"}
+        ch.qos.logback/logback-classic {:mvn/version "1.4.14"}
 
-        ;; org.apache.ignite/ignite-core {:mvn/version "2.15.0"}
-        ;; org.apache.ignite/ignite-spring {:mvn/version "2.15.0"}
-        ;; org.apache.ignite/ignite-zookeeper {:mvn/version "2.15.0"}
+        org.apache.ignite/ignite-core {:mvn/version "2.16.0"}
+        org.apache.ignite/ignite-spring {:mvn/version "2.16.0"}
+        org.apache.ignite/ignite-zookeeper {:mvn/version "2.16.0"}
 
-        org.gridgain/ignite-core {:mvn/version "8.8.20"}
-        org.gridgain/ignite-spring {:mvn/version "8.8.20"}
-        org.gridgain/ignite-zookeeper {:mvn/version "8.8.20"}
+        ;; org.gridgain/ignite-core {:mvn/version "8.8.20"}
+        ;; org.gridgain/ignite-spring {:mvn/version "8.8.20"}
+        ;; org.gridgain/ignite-zookeeper {:mvn/version "8.8.20"}
 
-        nrepl/nrepl {:mvn/version "1.0.0"}
-        cider/cider-nrepl {:mvn/version "0.31.0"}
-        refactor-nrepl/refactor-nrepl {:mvn/version "3.6.0"}
+        nrepl/nrepl {:mvn/version "1.1.0"}
+        cider/cider-nrepl {:mvn/version "0.45.0"}
+        refactor-nrepl/refactor-nrepl {:mvn/version "3.9.1"}
 
         aero/aero {:mvn/version "1.1.6"}
 
